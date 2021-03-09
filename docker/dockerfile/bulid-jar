@@ -1,0 +1,7 @@
+FROM gmaslowski/jdk
+MAINTAINER litterqa
+RUN echo "Asia/Shanghai" > /etc/timezone
+RUN mkdir /app
+ADD ./*.jar /app/app.jar
+CMD ["java", "-jar", "-Dspring.datasource.url=jdbc:postgresql://10.3.4.102:5432/postgres" , "-Dspring.datasource.username=sys"  ,"-Dspring.datasource.password=KVwtj6M4F", "/app/app.jar", "--user.timezone=GMT+08"]
+EXPOSE 8087
