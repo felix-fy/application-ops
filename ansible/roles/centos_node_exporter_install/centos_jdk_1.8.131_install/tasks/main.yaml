@@ -1,0 +1,27 @@
+- name: mkdir /usr/local/java/jdk
+  file:
+    path: /usr/local/java/jdk
+    state: directory
+    recurse: yes
+    mode: 7777
+
+- name: install unzip  packages
+  yum: name={{ item.name  }} state=present
+  with_items:
+          - name:   unzip
+
+
+- name: extract java.zip to /usr/local/java/jdk/
+  unarchive:
+    src: linux-x64_jdk1.8.0_131.zip
+    dest: /usr/local/java/jdk/
+    mode: 7777   
+
+- name: copy java profile to /etc/profile.d/
+  copy: 
+    src: java_profile.sh
+    dest: /etc/profile.d/
+    mode: 0644
+
+- name: java profile  effective
+  shell: sh  /etc/profile
