@@ -1,0 +1,14 @@
+---
+- name: copy repo
+  copy:
+    src: prometheus.repo
+    dest: /etc/yum.repos.d/
+- name: install  packages
+  yum: name={{ item.name }} state=present
+  with_items:
+      - name: node_exporter
+- name: copy node_exporter to /etc/default/
+  copy:
+    src: node_exporter
+    dest: /etc/default/
+  notify: restart node_exporter
