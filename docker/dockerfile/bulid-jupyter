@@ -1,0 +1,15 @@
+From python:3.7
+WORKDIR /opt/python
+RUN apt update && apt install -y cmake gcc vim wget curl 
+RUN pip3 install -i https://pypi.douban.com/simple/ requests
+RUN pip3 install -i https://pypi.douban.com/simple/ PyMySQL
+RUN pip3 install -i https://pypi.douban.com/simple/ pandas
+RUN pip3 install -i https://pypi.douban.com/simple/ numpy
+RUN pip3 install -i https://pypi.douban.com/simple/ matplotlib
+RUN pip3 install -i https://pypi.douban.com/simple/ sqlalchemy
+RUN pip3 install -i https://pypi.douban.com/simple/ tensorflow
+RUN pip3 install -i https://pypi.douban.com/simple/ sklearn
+RUN pip3 install -i https://pypi.douban.com/simple/ jupyter
+RUN apt autoclean && apt clean
+RUN rm -rf /tmp/* && rm -rf ~/.cache/pip
+CMD ["jupyter-notebook","--ip='0.0.0.0'","--allow-root"]
