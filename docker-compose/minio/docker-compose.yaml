@@ -1,0 +1,17 @@
+version: '3'
+services:
+  minio:
+    image: minio/minio
+    hostname: "minio"
+    restart: always
+    ports:
+      - 9000:9000 # api 
+      - 9001:9001 # web console
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: admin123
+    volumes:
+      - ./data:/data
+      - ./config:/root/.minio/
+    command: server --console-address ':9001' /data
+    privileged: true
